@@ -17,17 +17,35 @@ chrome.runtime.onMessage.addListener(
       }).then(function r(response) {
         response.json().then(function zuluResponse(result) {
           const views = result && result.entityViews;
-          const resp = (views || []).map(view => {
-            return view.view.static_images[0];
+          const pidImages = (views || []).map(view => {
+            return {
+              entityId: view.entityId,
+              image: view.view.static_images[0]
+            };
           });
+          const enteredPids = (request.payload || '').split(',');
+          const validPids = pidImages.map(pid => pid.entityId);
+          const invalidPids = [];
+          for (let i = 0; i < enteredPids.length; i++) {
+            if (validPids.indexOf(enteredPids[i]) === -1) {
+              invalidPids.push(enteredPids[i]);
+            }
+          }
           // Download all images
-          for (const image of resp) {
-            chrome.downloads.download({ url: image },
+          for (const pidImage of pidImages) {
+            chrome.downloads.download({ url: pidImage.image },
               function (id) {
               });
           }
+
+          if (invalidPids.length > 0) {
+            alert(`Unable to download image for ${invalidPids.join()}`)
+          }
         });
-      });
+      })
+        .error((error) => {
+          alert('errr');
+        });
     }
   }
 );
