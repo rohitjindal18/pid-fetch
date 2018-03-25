@@ -1,0 +1,32 @@
+{
+  "name": "Download Product Images",
+  "description": "Enter product id's and download them.",
+  "version": "1",
+  "minimum_chrome_version": "16.0.884",
+  "permissions": [
+    "downloads",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "webRequest"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "popup.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "send_links.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}

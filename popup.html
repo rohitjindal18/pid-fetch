@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<head>
+  <script src='popup.js'></script>
+  <style>
+    body {
+      width: 200px;
+      height: 40px;
+      background-color: #eee;
+    }
+
+    #label {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    input {
+      margin-top: 20px;
+      outline: none;
+      width: 180px;
+      height: 20px;
+    }
+
+    .inputdiv {
+      display: flex;
+      justify-content: center;
+      color: black;
+      font-size: 11px;
+    }
+
+    .download {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='label'> Download Product Images</div>
+  <div class='inputdiv'>
+    <input type=text id=filter placeholder="Enter all PID's *">
+  </div>
+  <div class='inputdiv'>(* seperated by comma)</div>
+  <br>
+  <div class="download">
+    <button id=download0>Download All!</button>
+  </div>
+</body>
+
+</html>
